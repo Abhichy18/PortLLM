@@ -362,7 +362,7 @@ run_model_remover_menu() {
 
 echo ""
 echo -e "${CYN}==========================================================${RST}"
-echo -e "${CYN}   PORTABLE AI UNINSTALLER (${PLATFORM})${RST}"
+echo -e "${CYN}   PORTLLM UNINSTALLER (${PLATFORM})${RST}"
 echo -e "${CYN}==========================================================${RST}"
 echo ""
 echo "  [1] Remove selected model(s) (one / many / all)"

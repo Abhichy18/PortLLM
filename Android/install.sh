@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # ================================================================
-#  PORTABLE UNCENSORED AI - Android Native Installer (Llama.cpp)
+#  PortLLM - Android Native Installer (Llama.cpp)
 # ================================================================
 #  Natively compiles Llama.cpp on your device for max performance
 #  and sets up the universal USB folder architecture.
@@ -34,7 +34,7 @@ RST='\033[0m'
 
 echo ""
 echo -e "${CYN}==========================================================${RST}"
-echo -e "${CYN}   PORTABLE AI - Android Native Setup (Llama.cpp)         ${RST}"
+echo -e "${CYN}   PORTLLM - Android Native Setup (Llama.cpp)             ${RST}"
 echo -e "${CYN}==========================================================${RST}"
 
 # ================================================================

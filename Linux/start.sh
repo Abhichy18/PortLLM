@@ -1,10 +1,10 @@
 #!/bin/bash
 # ===================================================
-#  Portable AI - Fast Web Chat (Linux)
+#  PortLLM - AI Chat (Linux)
 # ===================================================
 
 echo "==================================================="
-echo "    Portable AI - Fast Web Chat Mode (Linux)"
+echo "    PortLLM - Chat Mode (Linux)"
 echo "==================================================="
 echo ""
 echo "  Launches the AI engine + browser chat UI."
