@@ -1,14 +1,14 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # ===================================================
-#  Portable AI - Android (Llama.cpp Engine)
+#  PortLLM - Android (Llama.cpp Engine)
 # ===================================================
 
 echo "==================================================="
-echo "    Portable AI - Android Native Launcher"
+echo "    PortLLM - Android Native Launcher"
 echo "==================================================="
 echo ""
 echo "  Launches the natively compiled AI engine"
-echo "  and beautifully serves the USB FastChatUI."
+echo "  and beautifully serves the PortLLM UI."
 echo ""
 
 # ---- Detect Termux ----
@@ -92,7 +92,7 @@ echo -e "\033[0;36m===================================================\033[0m"
 echo ""
 echo "  Which interface would you like to open?"
 echo ""
-echo -e "  \033[1;33m[1]\033[0m USB FastChat UI (Beautiful Dark Mode, Auto-Saves)"
+echo -e "  \033[1;33m[1]\033[0m PortLLM UI (Beautiful Dark Mode, Auto-Saves)"
 echo -e "  \033[1;33m[2]\033[0m Llama.cpp Default UI (Classic Raw Developer UI)"
 echo ""
 read -r -p "  Enter your choice (1 or 2): " UI_CHOICE
@@ -101,7 +101,7 @@ if [ "$UI_CHOICE" = "2" ]; then
     echo "  Opening Llama Default UI..."
     TARGET_URL="http://localhost:8080"
 else
-    echo "  Opening USB FastChat UI..."
+    echo "  Opening PortLLM UI..."
     TARGET_URL="http://localhost:3333"
 fi
 
@@ -113,7 +113,7 @@ am start -a android.intent.action.VIEW -d "$TARGET_URL" 2>/dev/null || \
 echo ""
 echo -e "\033[0;37m  Starting background server... Press Ctrl+C to shut down the AI.\033[0m"
 
-# Start the python proxy server so FastChatUI works and saves history
+# Start the python proxy server so PortLLM UI works and saves history
 if command -v python3 &> /dev/null; then
     python3 "$SHARED_DIR/chat_server.py" --no-browser --llama-cpp
 elif command -v python &> /dev/null; then

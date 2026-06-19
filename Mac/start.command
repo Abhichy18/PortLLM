@@ -1,10 +1,10 @@
 #!/bin/bash
 # ===================================================
-#  Portable AI - Fast Web Chat (Mac)
+#  PortLLM - AI Chat (Mac)
 # ===================================================
 
 echo "==================================================="
-echo "    Portable AI - Fast Web Chat Mode (Mac)"
+echo "    PortLLM - Chat Mode (Mac)"
 echo "==================================================="
 echo ""
 echo "  Launches the AI engine + browser chat UI."

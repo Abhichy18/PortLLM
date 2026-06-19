@@ -1,6 +1,6 @@
 #!/bin/bash
 # ================================================================
-#  PORTABLE UNCENSORED AI - Mac Setup Script
+#  PortLLM - Mac Setup Script
 # ================================================================
 #  Multi-Model Edition: Choose one or more AI models to install!
 #  Supports preset models + custom HuggingFace GGUF downloads.
@@ -96,7 +96,7 @@ free_gb() {
 # ================================================================
 echo ""
 echo -e "${CYN}==========================================================${RST}"
-echo -e "${CYN}   PORTABLE AI USB - Multi-Model Setup (Mac)              ${RST}"
+echo -e "${CYN}   PORTLLM USB - Multi-Model Setup (Mac)                  ${RST}"
 echo -e "${CYN}==========================================================${RST}"
 echo ""
 
@@ -588,7 +588,7 @@ if [ "${#DOWNLOAD_ERRORS[@]}" -gt 0 ]; then
     echo ""
     echo -e "${YLW}  You can re-run install.command to retry failed downloads.${RST}"
 else
-    echo -e "${GRN}   SETUP COMPLETE! YOUR PORTABLE AI IS READY!             ${RST}"
+    echo -e "${GRN}   SETUP COMPLETE! YOUR PORTLLM IS READY!                 ${RST}"
     echo -e "${CYN}==========================================================${RST}"
 fi
 
