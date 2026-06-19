@@ -570,7 +570,7 @@ foreach ($m in $SelectedModels) {
 
 Write-Host ""
 Write-Host "  To start your AI: Double-click  Windows\start-portllm.bat" -ForegroundColor White
-Write-Host "  On a Mac/Linux:   Run  start-fast-chat.sh from their folders" -ForegroundColor White
+Write-Host "  On a Mac/Linux:   Run  Mac/start.command or Linux/start.sh" -ForegroundColor White
 Write-Host ""
 Write-Host "Press any key to close this installer..." -ForegroundColor Yellow
 $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") | Out-Null
