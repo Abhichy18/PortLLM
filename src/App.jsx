@@ -395,8 +395,19 @@ export default function App() {
 
       {/* ============ FLOATING MOCKUP with 3D Scroll Animation ============ */}
       <section className="floating-mockup-section">
-        {/* Grid + Magenta Orb Background Layer */}
-        <div className="mockup-grid-bg" />
+        {/* Background Video Layer */}
+        <div className="mockup-video-bg-layer">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="mockup-video-bg"
+          >
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_101827_abebfeec-f243-466b-b494-7f6814c0fbbf.mp4" type="video/mp4" />
+          </video>
+          <div className="mockup-video-overlay" />
+        </div>
         <ContainerScroll
           titleComponent={null}
         >
