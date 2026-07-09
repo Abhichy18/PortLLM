@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { ContainerScroll } from './components/ui/ContainerScroll.jsx'
+import DisplayCards from './components/ui/DisplayCards.jsx'
 
 const GITHUB_REPO = 'https://github.com/Abhichy18/PortLLM'
 const GITHUB_ZIP = 'https://github.com/Abhichy18/PortLLM/archive/refs/heads/main.zip'
@@ -577,32 +578,39 @@ export default function App() {
           </div>
 
           <div className="comparison-container" id="features">
-            <div className="section-header">
-              <span className="section-badge">Features</span>
-              <h2 className="section-title">Why Choose PortLLM?</h2>
-              <p className="section-subtitle">A comparison of PortLLM unified cross-platform portability features against standard local LLM clients.</p>
-            </div>
-            <div className="comparison-grid">
-              <div className="comparison-card">
-                <div className="comp-icon-box cyan">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            <div className="features-split-layout">
+              {/* Left Column: Heading and Bullet Points */}
+              <div className="features-split-info">
+                <div className="section-header">
+                  <span className="section-badge">Features</span>
+                  <h2 className="section-title">Why Choose PortLLM?</h2>
+                  <p className="section-subtitle">
+                    A highly optimized local AI environment designed for portability, privacy, and absolute user freedom.
+                  </p>
                 </div>
-                <h3 className="comp-card-title">100% Portable Sandboxing</h3>
-                <p className="comp-card-desc">Runs directly from an external USB/SSD without host installation or administrator permissions. Bypasses registry pollution and keeps everything self-contained.</p>
+                <ul className="features-bullet-list">
+                  <li className="features-bullet-item">
+                    <span className="features-bullet-dot" />
+                    <span><strong>True Portability:</strong> Put your runtimes and models on a single USB/SSD and run anywhere.</span>
+                  </li>
+                  <li className="features-bullet-item">
+                    <span className="features-bullet-dot" />
+                    <span><strong>Unified Storage:</strong> Avoid redownloading models when switching devices.</span>
+                  </li>
+                  <li className="features-bullet-item">
+                    <span className="features-bullet-dot" />
+                    <span><strong>100% Offline:</strong> Air-gapped privacy. Your inputs never reach external servers.</span>
+                  </li>
+                  <li className="features-bullet-item">
+                    <span className="features-bullet-dot" />
+                    <span><strong>AVX-512 Optimized:</strong> Highly accelerated reasoning speeds on standard CPUs.</span>
+                  </li>
+                </ul>
               </div>
-              <div className="comparison-card">
-                <div className="comp-icon-box purple">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                </div>
-                <h3 className="comp-card-title">Cross-Platform Shared Models</h3>
-                <p className="comp-card-desc">Download a model weight once into the Shared directory and run it natively on Windows, macOS, Linux, and Android devices without duplicate downloads.</p>
-              </div>
-              <div className="comparison-card">
-                <div className="comp-icon-box cyan">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                </div>
-                <h3 className="comp-card-title">Hardware Telemetry Dashboard</h3>
-                <p className="comp-card-desc">Features a lightweight Python server with pure stdlib/ctypes telemetry, rendering real-time CPU and RAM utilization metrics directly on your chat interface.</p>
+
+              {/* Right Column: Stacked 3D Cards Deck */}
+              <div className="features-split-deck-container">
+                <DisplayCards />
               </div>
             </div>
           </div>
