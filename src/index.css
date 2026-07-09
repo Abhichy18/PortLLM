@@ -1617,6 +1617,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+
 .display-card-spark-dot {
   width: 6px;
   height: 6px;
@@ -1624,67 +1625,3 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(0, 112, 243, 0.3);
 }
 
-/* Stack default rotations and translations */
-.card-stack-0 {
-  transform: rotate(-8deg) translate3d(0, 0, 0);
-  z-index: 10;
-}
-
-.card-stack-1 {
-  transform: rotate(-6deg) translate3d(24px, 12px, -10px);
-  z-index: 9;
-  filter: grayscale(40%);
-  opacity: 0.95;
-}
-
-.card-stack-2 {
-  transform: rotate(-4deg) translate3d(48px, 24px, -20px);
-  z-index: 8;
-  filter: grayscale(70%);
-  opacity: 0.9;
-}
-
-.card-stack-3 {
-  transform: rotate(-2deg) translate3d(72px, 36px, -30px);
-  z-index: 7;
-  filter: grayscale(85%);
-  opacity: 0.85;
-}
-
-.card-stack-4 {
-  transform: rotate(0deg) translate3d(96px, 48px, -40px);
-  z-index: 6;
-  filter: grayscale(100%);
-  opacity: 0.8;
-}
-
-/* Deck Hover State - Fanning out smoothly */
-.display-cards-deck:hover .card-stack-0 {
-  transform: rotate(-10deg) translate3d(-30px, -40px, 30px);
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
-.display-cards-deck:hover .card-stack-1 {
-  transform: rotate(-5deg) translate3d(15px, -15px, 20px);
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
-.display-cards-deck:hover .card-stack-2 {
-  transform: rotate(0deg) translate3d(60px, 10px, 10px);
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
-.display-cards-deck:hover .card-stack-3 {
-  transform: rotate(5deg) translate3d(105px, 35px, 0);
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
-.display-cards-deck:hover .card-stack-4 {
-  transform: rotate(10deg) translate3d(150px, 60px, -10px);
-  filter: grayscale(0%);
-  opacity: 1;
-}
