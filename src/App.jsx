@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { ContainerScroll } from './components/ui/ContainerScroll.jsx'
 import DisplayCards from './components/ui/DisplayCards.jsx'
+import portllmInstallationGif from './assets/portllm-installation.gif'
+import step2Image from './assets/image.png'
 
 const GITHUB_REPO = 'https://github.com/Abhichy18/PortLLM'
 const GITHUB_ZIP = 'https://github.com/Abhichy18/PortLLM/archive/refs/heads/main.zip'
@@ -456,7 +458,8 @@ export default function App() {
 
       {/* ============ LIGHT CONTENT (kept as-is) ============ */}
       <main className="light-content-section" id="setup">
-        <div className="section-container">
+        <div className="documentation-bg-wrapper">
+          <div className="section-container">
 
           <div className="section-header">
             <span className="section-badge">Documentation</span>
@@ -482,14 +485,34 @@ export default function App() {
                       <span className="timeline-step-badge">Step 1</span>
                       <h3 className="timeline-step-title">Initialize the Setup</h3>
                       <p className="timeline-step-desc">Open your local project directory or USB drive, navigate to the <strong>Windows/</strong> folder, and double-click <strong>install.bat</strong>. This initializes folder paths and prepares portable runtimes.</p>
-                      <ImagePlaceholder label="Screenshot: Running install.bat menu" />
+                      <div className="gif-box-outer">
+                        <div className="gif-box-chrome">
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-title">install.bat — PortLLM Setup</span>
+                        </div>
+                        <div className="gif-box-wrapper">
+                          <img src={portllmInstallationGif} alt="PortLLM Installation Process" className="gif-box-media" />
+                        </div>
+                      </div>
                     </div>
                     <div className="timeline-step">
                       <div className="timeline-marker"></div>
                       <span className="timeline-step-badge">Step 2</span>
                       <h3 className="timeline-step-title">Choose and Download Model</h3>
                       <p className="timeline-step-desc">Select a curated uncensored model from the CLI menu catalog (we recommend <strong>Option [1] Gemma 2 2B Abliterated</strong>). The setup automatically installs the engine and downloads files into your Shared directory.</p>
-                      <ImagePlaceholder label="Screenshot: Selecting and downloading GGUF weights" />
+                      <div className="gif-box-outer">
+                        <div className="gif-box-chrome">
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-title">install.bat — Model Selection</span>
+                        </div>
+                        <div className="gif-box-wrapper">
+                          <img src={step2Image} alt="Selecting and downloading GGUF weights" className="gif-box-media" />
+                        </div>
+                      </div>
                     </div>
                     <div className="timeline-step">
                       <div className="timeline-marker"></div>
@@ -576,7 +599,10 @@ export default function App() {
               )}
             </div>
           </div>
+        </div>
+      </div>
 
+      <div className="section-container rest-content-container">
           <div className="comparison-container" id="features">
             <div className="features-split-layout">
               {/* Left Column: Heading and Bullet Points */}
