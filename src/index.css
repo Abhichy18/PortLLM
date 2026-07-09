@@ -327,7 +327,38 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: transparent;
+  background: white;
+  overflow: hidden;
+}
+
+/* Soft Yellow Glow — center */
+.floating-mockup-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle at center, #FFF991 0%, transparent 70%);
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Teal Glow — top right */
+.floating-mockup-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #ffffff;
+  background-image: radial-gradient(circle at top right, rgba(56, 193, 182, 0.45), transparent 70%);
+  filter: blur(80px);
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.floating-mockup-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-group-above-mockup {

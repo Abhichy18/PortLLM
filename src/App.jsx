@@ -395,6 +395,8 @@ export default function App() {
 
       {/* ============ FLOATING MOCKUP with 3D Scroll Animation ============ */}
       <section className="floating-mockup-section">
+        {/* Grid + Magenta Orb Background Layer */}
+        <div className="mockup-grid-bg" />
         <ContainerScroll
           titleComponent={null}
         >
