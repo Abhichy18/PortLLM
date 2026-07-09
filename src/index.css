@@ -1175,6 +1175,9 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   font-weight: 900;
   pointer-events: none;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(255, 255, 255, 0.15);
 }
 
 .splash-title-word-1 {
@@ -1191,10 +1194,11 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 3rem;
   z-index: 45;
   text-align: center;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1rem;
+  color: #ffffff;
+  font-size: 1.1rem;
   font-family: var(--font-sans);
   font-weight: 500;
   pointer-events: none;
   transition: opacity 0.1s ease-out;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }

@@ -189,16 +189,19 @@ export default function App() {
   useVideoFadeLoop(videoRef)
 
   useEffect(() => {
-    if (!showSplash) return
-
     const handleWheel = (e) => {
-      e.preventDefault()
-      const scrollDelta = e.deltaY * 0.0009
-      const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1)
-      setScrollProgress(newProgress)
-
-      if (newProgress >= 1) {
-        setShowSplash(false)
+      if (showSplash) {
+        e.preventDefault()
+        const scrollDelta = e.deltaY * 0.0009
+        const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1)
+        setScrollProgress(newProgress)
+        if (newProgress >= 1) {
+          setShowSplash(false)
+        }
+      } else if (window.scrollY <= 0 && e.deltaY < 0) {
+        e.preventDefault()
+        setShowSplash(true)
+        setScrollProgress(1)
       }
     }
 
@@ -207,27 +210,39 @@ export default function App() {
     }
 
     const handleTouchMove = (e) => {
-      e.preventDefault()
-      if (!touchStartY) return
-      const touchY = e.touches[0].clientY
-      const deltaY = touchStartY - touchY
-      const scrollDelta = deltaY * 0.006
-      const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1)
-      setScrollProgress(newProgress)
-
-      if (newProgress >= 1) {
-        setShowSplash(false)
+      if (showSplash) {
+        e.preventDefault()
+        if (!touchStartY) return
+        const touchY = e.touches[0].clientY
+        const deltaY = touchStartY - touchY
+        const scrollDelta = deltaY * 0.006
+        const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1)
+        setScrollProgress(newProgress)
+        if (newProgress >= 1) {
+          setShowSplash(false)
+        }
+        setTouchStartY(touchY)
+      } else if (window.scrollY <= 0) {
+        const touchY = e.touches[0].clientY
+        const deltaY = touchStartY - touchY
+        if (deltaY < -20) {
+          e.preventDefault()
+          setShowSplash(true)
+          setScrollProgress(1)
+        }
+        setTouchStartY(touchY)
       }
-      setTouchStartY(touchY)
     }
 
-    const handleScroll = (e) => {
-      window.scrollTo(0, 0)
+    const handleScroll = () => {
+      if (showSplash) {
+        window.scrollTo(0, 0)
+      }
     }
 
     window.addEventListener('wheel', handleWheel, { passive: false })
     window.addEventListener('scroll', handleScroll)
-    window.addEventListener('touchstart', handleTouchStart)
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
     window.addEventListener('touchmove', handleTouchMove, { passive: false })
 
     return () => {
@@ -282,7 +297,7 @@ export default function App() {
             />
           </div>
 
-          <div className="splash-title-container" style={{ mixBlendMode: 'difference' }}>
+          <div className="splash-title-container">
             <h2 
               className="splash-title-word-1"
               style={{ transform: `translateX(-${scrollProgress * 150}vw)` }}
