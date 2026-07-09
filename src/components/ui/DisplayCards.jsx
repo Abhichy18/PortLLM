@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function SparklesIcon({ className = "" }) {
   return (
@@ -57,41 +57,40 @@ const DEFAULT_CARDS = [
     title: "100% Portable Sandboxing",
     description: "Runs directly from external USB/SSD with zero registry footprint.",
     date: "Secure Sandbox",
-    className: "card-stack-0",
   },
   {
     icon: <CpuIcon className="display-card-icon text-blue-300" />,
     title: "Cross-Platform Models",
     description: "Download once, run natively on Windows, macOS, Linux, and Android.",
     date: "Unified Storage",
-    className: "card-stack-1",
   },
   {
     icon: <SparklesIcon className="display-card-icon text-blue-300" />,
     title: "Hardware Telemetry",
     description: "Real-time CPU & RAM utilization tracked directly on your UI dashboard.",
     date: "System Optimizer",
-    className: "card-stack-2",
   },
   {
     icon: <LayersIcon className="display-card-icon text-blue-300" />,
     title: "Zero-Dependency Engine",
     description: "Pre-compiled runtimes packaged directly. No setups required.",
     date: "Instant Launch",
-    className: "card-stack-3",
   },
   {
     icon: <ShieldIcon className="display-card-icon text-blue-300" />,
     title: "Computational Privacy",
     description: "100% offline. Zero telemetry tracking or calls to remote servers.",
     date: "Air-gapped Safety",
-    className: "card-stack-4",
   },
 ]
 
-export function DisplayCard({ icon, title, description, date, className }) {
+export function DisplayCard({ icon, title, description, date, onClick, style }) {
   return (
-    <div className={`display-card ${className}`}>
+    <div
+      className="display-card"
+      onClick={onClick}
+      style={style}
+    >
       <div className="display-card-header">
         <span className="display-card-icon-bg">
           {icon}
@@ -108,11 +107,53 @@ export function DisplayCard({ icon, title, description, date, className }) {
 }
 
 export default function DisplayCards({ cards = DEFAULT_CARDS }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
+
   return (
-    <div className="display-cards-deck">
-      {cards.map((card, index) => (
-        <DisplayCard key={index} {...card} />
-      ))}
+    <div
+      className="display-cards-deck"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {cards.map((card, index) => {
+        const diff = (index - activeIndex + cards.length) % cards.length
+
+        // Base values
+        let zIndex = 10 - diff
+        let opacity = 1 - diff * 0.05
+        let filter = diff > 0 ? `grayscale(${diff * 20}%)` : 'none'
+        
+        let transform = `rotate(${-8 + diff * 2}deg) translate3d(${diff * 24}px, ${diff * 12}px, -${diff * 10}px)`
+
+        // Fanning out styles on hover
+        if (isHovered) {
+          opacity = 1
+          filter = 'none'
+          const rotateVal = -10 + diff * 5
+          const translateX = -30 + diff * 45
+          const translateY = -40 + diff * 25
+          const translateZ = 30 - diff * 10
+          transform = `rotate(${rotateVal}deg) translate3d(${translateX}px, ${translateY}px, ${translateZ}px)`
+        }
+
+        const cardStyle = {
+          zIndex,
+          opacity,
+          filter,
+          transform,
+          cursor: 'pointer',
+        }
+
+        return (
+          <DisplayCard
+            key={index}
+            {...card}
+            onClick={() => setActiveIndex(index)}
+            style={cardStyle}
+          />
+        )
+      })}
     </div>
   )
 }
