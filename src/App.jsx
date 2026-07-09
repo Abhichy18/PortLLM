@@ -721,7 +721,7 @@ export default function App() {
                 <GithubIcon size={20} />
               </a>
               <a
-                href="https://x.com"
+                href="https://x.com/Abhichy18"
                 target="_blank"
                 rel="nofollow noopener noreferrer"
                 aria-label="X (formerly Twitter)"
@@ -730,7 +730,7 @@ export default function App() {
                 <TwitterIcon className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/abhishek-choudhary18/"
                 target="_blank"
                 rel="nofollow noopener noreferrer"
                 aria-label="LinkedIn"
