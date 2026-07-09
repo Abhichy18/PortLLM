@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
+import { ContainerScroll } from './components/ui/ContainerScroll.jsx'
 
 const GITHUB_REPO = 'https://github.com/Abhichy18/PortLLM'
 const GITHUB_ZIP = 'https://github.com/Abhichy18/PortLLM/archive/refs/heads/main.zip'
@@ -392,22 +393,26 @@ export default function App() {
         </section>
       </div>
 
-      {/* ============ FLOATING MOCKUP (kept as-is) ============ */}
+      {/* ============ FLOATING MOCKUP with 3D Scroll Animation ============ */}
       <section className="floating-mockup-section">
-        <div className="mockup-card-container">
-          <div className="mockup-card">
-            <div className="mockup-window-header">
-              <div className="window-dots">
-                <span className="window-dot red"></span>
-                <span className="window-dot yellow"></span>
-                <span className="window-dot green"></span>
+        <ContainerScroll
+          titleComponent={null}
+        >
+          <div className="mockup-card-container" style={{ margin: 0, padding: 0 }}>
+            <div className="mockup-card" style={{ margin: 0, maxWidth: '100%', borderRadius: 0, border: 'none', boxShadow: 'none' }}>
+              <div className="mockup-window-header">
+                <div className="window-dots">
+                  <span className="window-dot red"></span>
+                  <span className="window-dot yellow"></span>
+                  <span className="window-dot green"></span>
+                </div>
+                <div className="window-title">PortLLM UI &mdash; Local Server Active</div>
+                <div style={{ width: '40px' }}></div>
               </div>
-              <div className="window-title">PortLLM UI &mdash; Local Server Active</div>
-              <div style={{ width: '40px' }}></div>
+              <MockupUI />
             </div>
-            <MockupUI />
           </div>
-        </div>
+        </ContainerScroll>
       </section>
 
       {/* ============ LIGHT CONTENT (kept as-is) ============ */}

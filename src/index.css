@@ -1202,3 +1202,71 @@ h1, h2, h3, h4, h5, h6 {
   transition: opacity 0.1s ease-out;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
+
+/* ==========================================
+   CONTAINER SCROLL 3D ANIMATION
+   ========================================== */
+.container-scroll-wrapper {
+  height: 60rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-scroll-wrapper {
+    height: 80rem;
+    padding: 5rem;
+  }
+}
+
+.container-scroll-inner {
+  padding: 2.5rem 0;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .container-scroll-inner {
+    padding: 10rem 0;
+  }
+}
+
+.container-scroll-header {
+  max-width: 64rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container-scroll-card {
+  max-width: 64rem;
+  margin: -3rem auto 0;
+  width: 100%;
+  border: 4px solid #6C6C6C;
+  padding: 0.5rem;
+  background: #222222;
+  border-radius: 30px;
+}
+
+@media (min-width: 768px) {
+  .container-scroll-card {
+    padding: 1.5rem;
+  }
+}
+
+.container-scroll-card-inner {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #1a1a2e;
+}
+
+@media (min-width: 768px) {
+  .container-scroll-card-inner {
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+}
