@@ -181,9 +181,62 @@ export default function App() {
   const [catalogTab, setCatalogTab] = useState('desktop')
   const [copied, setCopied] = useState('')
   const [openFAQ, setOpenFAQ] = useState(null)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [showSplash, setShowSplash] = useState(true)
+  const [touchStartY, setTouchStartY] = useState(0)
   const videoRef = useRef(null)
 
   useVideoFadeLoop(videoRef)
+
+  useEffect(() => {
+    if (!showSplash) return
+
+    const handleWheel = (e) => {
+      e.preventDefault()
+      const scrollDelta = e.deltaY * 0.0009
+      const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1)
+      setScrollProgress(newProgress)
+
+      if (newProgress >= 1) {
+        setShowSplash(false)
+      }
+    }
+
+    const handleTouchStart = (e) => {
+      setTouchStartY(e.touches[0].clientY)
+    }
+
+    const handleTouchMove = (e) => {
+      e.preventDefault()
+      if (!touchStartY) return
+      const touchY = e.touches[0].clientY
+      const deltaY = touchStartY - touchY
+      const scrollDelta = deltaY * 0.006
+      const newProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1)
+      setScrollProgress(newProgress)
+
+      if (newProgress >= 1) {
+        setShowSplash(false)
+      }
+      setTouchStartY(touchY)
+    }
+
+    const handleScroll = (e) => {
+      window.scrollTo(0, 0)
+    }
+
+    window.addEventListener('wheel', handleWheel, { passive: false })
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('touchstart', handleTouchStart)
+    window.addEventListener('touchmove', handleTouchMove, { passive: false })
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchmove', handleTouchMove)
+    }
+  }, [scrollProgress, showSplash, touchStartY])
 
   function handleCopy(text) {
     navigator.clipboard.writeText(text)
@@ -196,8 +249,73 @@ export default function App() {
   return (
     <div className="page-root">
 
-      {/* ============ HERO WRAPPER (white bg + video at bottom) ============ */}
-      <div className="hero-wrapper">
+      {/* Splash Overlay Elements */}
+      {showSplash && (
+        <div className="splash-backdrop-layer">
+          <div 
+            className="splash-bg-image"
+            style={{
+              opacity: 1 - scrollProgress,
+              backgroundImage: "url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format&fit=crop')",
+            }}
+          />
+          
+          {/* Expanding Video Container */}
+          <div
+            className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-2xl overflow-hidden"
+            style={{
+              width: `${300 + scrollProgress * (window.innerWidth - 300)}px`,
+              height: `${400 + scrollProgress * (window.innerHeight - 400)}px`,
+              borderRadius: `${16 * (1 - scrollProgress)}px`,
+              boxShadow: `0 15px 50px rgba(0, 0, 0, ${0.35 * (1 - scrollProgress)})`,
+              transition: 'none',
+            }}
+          >
+            <video
+              src={HERO_VIDEO}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="hero-video"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+
+          <div className="splash-title-container" style={{ mixBlendMode: 'difference' }}>
+            <h2 
+              className="splash-title-word-1"
+              style={{ transform: `translateX(-${scrollProgress * 150}vw)` }}
+            >
+              Welcome
+            </h2>
+            <h2 
+              className="splash-title-word-2"
+              style={{ transform: `translateX(${scrollProgress * 150}vw)` }}
+            >
+              to PortLLM
+            </h2>
+          </div>
+
+          <div className="splash-subtitle-container" style={{ opacity: 1 - scrollProgress }}>
+            <p>Offline Local AI Sandbox</p>
+            <p className="animate-pulse" style={{ marginTop: '4px' }}>Scroll down to unlock</p>
+          </div>
+        </div>
+      )}
+
+      {/* Main Page Content Layer */}
+      <div 
+        className="main-page-content"
+        style={{
+          opacity: showSplash ? 0 : 1,
+          transition: 'opacity 0.8s ease-in-out',
+          position: 'relative',
+          zIndex: showSplash ? 5 : 10,
+        }}
+      >
+        {/* ============ HERO WRAPPER (white bg + video at bottom) ============ */}
+        <div className="hero-wrapper">
 
         {/* Video Background Layer */}
         <div className="hero-video-layer">
@@ -491,6 +609,7 @@ export default function App() {
           <p className="footer-credits">PortLLM is designed for computational privacy and absolute freedom. Built upon open-source local LLM concepts, extended with custom cross-platform runtimes, telemetry systems, and zero-dependency architectures. MIT Licensed.</p>
         </div>
       </footer>
+      </div>
     </div>
   )
 }
