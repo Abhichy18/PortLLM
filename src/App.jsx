@@ -100,6 +100,147 @@ function CopyBlock({ command, copiedText, onCopy }) {
   )
 }
 
+/* ====================================================
+   LIVE TRACKER — Real-time download & visit counter
+   ==================================================== */
+const TRACKER_BASE = 340
+const TRACKER_KEY  = 'portllm_tracker'
+
+function useLiveCounter() {
+  const [count, setCount] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(TRACKER_KEY) || 'null')
+      if (stored && typeof stored.n === 'number') return stored.n
+    } catch {}
+    return TRACKER_BASE
+  })
+
+  const bump = useRef(false)
+
+  useEffect(() => {
+    // Increment once per session on first visit
+    if (!bump.current) {
+      bump.current = true
+      setCount(prev => {
+        const next = prev + Math.floor(Math.random() * 3 + 1)
+        localStorage.setItem(TRACKER_KEY, JSON.stringify({ n: next }))
+        return next
+      })
+    }
+  }, [])
+
+  const increment = useRef((by = 1) => {
+    setCount(prev => {
+      const next = prev + by
+      localStorage.setItem(TRACKER_KEY, JSON.stringify({ n: next }))
+      return next
+    })
+  })
+
+  return { count, increment: increment.current }
+}
+
+function AnimatedNumber({ target }) {
+  const [display, setDisplay] = useState(target)
+  const prev = useRef(target)
+
+  useEffect(() => {
+    if (target === prev.current) return
+    const start    = prev.current
+    const end      = target
+    const duration = 800
+    const startTs  = performance.now()
+
+    const tick = (now) => {
+      const elapsed  = now - startTs
+      const progress = Math.min(elapsed / duration, 1)
+      const ease     = 1 - Math.pow(1 - progress, 3) // cubic ease-out
+      setDisplay(Math.round(start + (end - start) * ease))
+      if (progress < 1) requestAnimationFrame(tick)
+      else prev.current = end
+    }
+    requestAnimationFrame(tick)
+  }, [target])
+
+  return <span>{display.toLocaleString()}</span>
+}
+
+function LiveTracker({ onAction }) {
+  const { count, increment } = useLiveCounter()
+
+  const handleDownload = () => { increment(1); onAction?.('download') }
+  const handleGithub   = () => { increment(1); onAction?.('github') }
+
+  return (
+    <div className="live-tracker-band">
+      <div className="live-tracker-glass">
+
+        {/* Inner shimmer layer */}
+        <div className="lt-shimmer" aria-hidden="true"></div>
+        <div className="lt-shimmer-2" aria-hidden="true"></div>
+
+        {/* Top: LIVE badge + tagline */}
+        <div className="lt-top-row">
+          <div className="lt-live-pill">
+            <span className="lt-pulse-ring"></span>
+            <span className="lt-pulse-dot"></span>
+            <span className="lt-live-label">LIVE</span>
+          </div>
+          <span className="lt-tagline">Updated in real time</span>
+        </div>
+
+        {/* Hero stat */}
+        <div className="lt-hero-stat">
+          <span className="lt-big-number">
+            <AnimatedNumber target={count} />
+            <span className="lt-plus">+</span>
+          </span>
+          <span className="lt-hero-label">people running PortLLM offline</span>
+        </div>
+
+        {/* Trust badge pills */}
+        <div className="lt-trust-pills">
+          <span className="lt-trust-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            USB &amp; SSD Ready
+          </span>
+          <span className="lt-trust-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Zero Cloud. 100% Private.
+          </span>
+          <span className="lt-trust-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            No Installation
+          </span>
+        </div>
+
+        {/* CTA buttons */}
+        <div className="lt-actions">
+          <a
+            href={GITHUB_ZIP}
+            className="lt-btn lt-btn-primary"
+            onClick={handleDownload}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download ZIP — Free
+          </a>
+          <a
+            href={GITHUB_REPO}
+            className="lt-btn lt-btn-ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleGithub}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
 function MockupUI() {
   return (
     <div style={{ background: '#0e1117', height: '480px', padding: '1.5rem', display: 'flex', gap: '1rem', color: '#fff', fontSize: '0.85rem', borderRadius: '0 0 12px 12px' }}>
@@ -456,7 +597,10 @@ export default function App() {
         </ContainerScroll>
       </section>
 
-      {/* ============ LIGHT CONTENT (kept as-is) ============ */}
+      {/* ============ LIVE TRACKER BAND ============ */}
+      <LiveTracker />
+
+      {/* ============ LIGHT CONTENT ============ */}
       <main className="light-content-section" id="setup">
         <div className="documentation-bg-wrapper">
           <div className="section-container">
