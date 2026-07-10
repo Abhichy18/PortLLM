@@ -4,6 +4,7 @@ import { ContainerScroll } from './components/ui/ContainerScroll.jsx'
 import DisplayCards from './components/ui/DisplayCards.jsx'
 import portllmInstallationGif from './assets/portllm-installation.gif'
 import step2Image from './assets/image.png'
+import installationDemoVideo from './assets/Installation demo Portllm.mp4'
 
 const GITHUB_REPO = 'https://github.com/Abhichy18/PortLLM'
 const GITHUB_ZIP = 'https://github.com/Abhichy18/PortLLM/archive/refs/heads/main.zip'
@@ -663,7 +664,24 @@ export default function App() {
                       <span className="timeline-step-badge">Step 3</span>
                       <h3 className="timeline-step-title">Launch the AI Dashboard</h3>
                       <p className="timeline-step-desc">Double-click <strong>start-portllm.bat</strong>. The offline Ollama engine spins up securely in the background, and your browser opens to serve the local Chat UI automatically on port 3333.</p>
-                      <ImagePlaceholder label="Screenshot: PortLLM Dashboard loading" />
+                      <div className="gif-box-outer">
+                        <div className="gif-box-chrome">
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-dot"></span>
+                          <span className="gif-box-chrome-title">start-portllm.bat — PortLLM Dashboard</span>
+                        </div>
+                        <div className="gif-box-wrapper">
+                          <video 
+                            src={installationDemoVideo} 
+                            className="gif-box-media" 
+                            autoPlay 
+                            loop 
+                            muted 
+                            playsInline 
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
