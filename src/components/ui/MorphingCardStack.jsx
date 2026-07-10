@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion"
 import { cn } from "../../lib/utils"
-import { Grid3X3, Layers, LayoutList } from "lucide-react"
+import { Grid3X3, Layers } from "lucide-react"
 
 const layoutIcons = {
   stack: Layers,
   grid: Grid3X3,
-  list: LayoutList,
 }
 
 const SWIPE_THRESHOLD = 50
@@ -65,13 +64,12 @@ export function MorphingCardStack({
     switch (layout) {
       case "stack":
         return {
-          top: stackPosition * 10,
-          left: stackPosition * 8,
+          top: stackPosition * 8,
+          left: `calc(4% + ${stackPosition * 6}px)`,
           zIndex: processedCards.length - stackPosition,
           rotate: (stackPosition - 1) * 1.5,
         }
       case "grid":
-      case "list":
         return {
           top: 0,
           left: 0,
@@ -82,17 +80,16 @@ export function MorphingCardStack({
   }
 
   const containerStyles = {
-    stack: "relative h-[360px] w-full max-w-[420px] flex items-center justify-center",
+    stack: "relative h-[360px] w-full max-w-[420px]",
     grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full",
-    list: "flex flex-col gap-6 w-full max-w-3xl mx-auto",
   }
 
   const displayCards = layout === "stack" ? getStackOrder() : processedCards.map((c, i) => ({ ...c, stackPosition: i }))
 
   return (
-    <div className={cn("space-y-8", className)}>
-      {/* Layout Toggle */}
-      <div className="flex items-center justify-center gap-2 rounded-full border border-slate-200/80 bg-white/70 backdrop-blur-md p-1.5 w-fit mx-auto shadow-sm">
+    <div className={cn("flex flex-col items-center justify-center w-full space-y-8", className)}>
+      {/* Layout Toggle - Premium Pill Selector */}
+      <div className="flex items-center justify-center gap-1.5 rounded-full border border-slate-200/80 bg-white/80 backdrop-blur-md p-1.5 w-fit mx-auto shadow-sm">
         {Object.keys(layoutIcons).map((mode) => {
           const Icon = layoutIcons[mode]
           const isActive = layout === mode
@@ -101,15 +98,15 @@ export function MorphingCardStack({
               key={mode}
               onClick={() => setLayout(mode)}
               className={cn(
-                "rounded-full p-2 transition-all duration-300 flex items-center gap-2 text-sm font-semibold cursor-pointer px-4",
+                "rounded-full py-2 px-6 transition-all duration-300 flex items-center gap-2 text-sm font-semibold cursor-pointer border border-transparent select-none",
                 isActive
-                  ? "bg-slate-900 text-white shadow-sm"
-                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+                  ? "bg-slate-900 text-white shadow-md shadow-slate-900/10 border-slate-900"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/80"
               )}
               aria-label={`Switch to ${mode} layout`}
             >
               <Icon className="h-4 w-4" />
-              <span className="capitalize hidden sm:inline">{mode}</span>
+              <span className="capitalize">{mode}</span>
             </button>
           )
         })}
@@ -157,7 +154,6 @@ export function MorphingCardStack({
                     layout === "stack" && "absolute w-[92%] h-[320px]",
                     layout === "stack" && isTopCard && "cursor-grab active:cursor-grabbing",
                     layout === "grid" && "w-full",
-                    layout === "list" && "w-full",
                     isExpanded && "ring-2 ring-blue-500/50 border-blue-500/50"
                   )}
                   style={{
@@ -178,8 +174,7 @@ export function MorphingCardStack({
                   <p className={cn(
                     "model-desc pointer-events-none",
                     layout === "stack" && "line-clamp-4",
-                    layout === "grid" && "line-clamp-3",
-                    layout === "list" && "line-clamp-2"
+                    layout === "grid" && "line-clamp-3"
                   )}>
                     {card.desc}
                   </p>
