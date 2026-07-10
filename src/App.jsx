@@ -365,14 +365,14 @@ export default function App() {
         <div className="hero-video-layer">
           <video
             ref={videoRef}
+            src={HERO_VIDEO}
             autoPlay
             muted
+            loop
             playsInline
             className="hero-video"
-            style={{ opacity: 0 }}
-          >
-            <source src={HERO_VIDEO} type="video/mp4" />
-          </video>
+            style={{ opacity: 1 }}
+          />
           <div className="hero-gradient-top"></div>
           <div className="hero-gradient-bottom"></div>
         </div>
