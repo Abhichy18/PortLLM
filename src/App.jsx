@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { ContainerScroll } from './components/ui/ContainerScroll.jsx'
 import DisplayCards from './components/ui/DisplayCards.jsx'
+import { MorphingCardStack } from './components/ui/MorphingCardStack.jsx'
 import portllmInstallationGif from './assets/portllm-installation.gif'
 import step2Image from './assets/image.png'
 import installationDemoVideo from './assets/Installation demo Portllm.mp4'
@@ -369,10 +370,6 @@ export default function App() {
         if (newProgress >= 1) {
           setShowSplash(false)
         }
-      } else if (window.scrollY <= 0 && e.deltaY < 0) {
-        e.preventDefault()
-        setShowSplash(true)
-        setScrollProgress(1)
       }
     }
 
@@ -391,15 +388,6 @@ export default function App() {
         setScrollProgress(newProgress)
         if (newProgress >= 1) {
           setShowSplash(false)
-        }
-        setTouchStartY(touchY)
-      } else if (window.scrollY <= 0) {
-        const touchY = e.touches[0].clientY
-        const deltaY = touchStartY - touchY
-        if (deltaY < -20) {
-          e.preventDefault()
-          setShowSplash(true)
-          setScrollProgress(1)
         }
         setTouchStartY(touchY)
       }
@@ -764,7 +752,8 @@ export default function App() {
         </div>
       </div>
 
-      <div className="section-container rest-content-container">
+      <div className="rest-content-wrapper">
+        <div className="section-container rest-content-container">
           <div className="comparison-container" id="features">
             <div className="features-split-layout">
               {/* Left Column: Heading and Bullet Points */}
@@ -813,19 +802,7 @@ export default function App() {
               <button className={`catalog-tab-btn ${catalogTab === 'desktop' ? 'active' : ''}`} onClick={() => setCatalogTab('desktop')}>Desktop Catalogs</button>
               <button className={`catalog-tab-btn ${catalogTab === 'mobile' ? 'active' : ''}`} onClick={() => setCatalogTab('mobile')}>Mobile Catalogs</button>
             </div>
-            <div className="catalog-grid">
-              {models.map((m, i) => (
-                <div className="model-card" key={i}>
-                  <div className="model-header">
-                    <span className={`model-badge ${m.label === 'UNCENSORED' ? 'uncensored' : 'standard'}`}>{m.label}</span>
-                    <span className="model-size">{m.size}</span>
-                  </div>
-                  <h3 className="model-name">{m.name}</h3>
-                  <p className="model-desc">{m.desc}</p>
-                  <div className="model-meta"><span>Tag: {m.badge}</span></div>
-                </div>
-              ))}
-            </div>
+            <MorphingCardStack cards={models} />
           </div>
 
           <div className="faq-container" id="faq">
@@ -848,7 +825,8 @@ export default function App() {
           </div>
 
         </div>
-      </main>
+      </div>
+    </main>
 
       {/* FOOTER - TAPED DESIGN */}
       <footer className="footer-taped-section">
