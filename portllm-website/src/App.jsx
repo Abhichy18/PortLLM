@@ -238,45 +238,45 @@ function LiveTracker({ onAction }) {
 
 function MockupUI() {
   return (
-    <div style={{ background: '#0e1117', height: '480px', padding: '1.5rem', display: 'flex', gap: '1rem', color: '#fff', fontSize: '0.85rem', borderRadius: '0 0 12px 12px' }}>
-      <div style={{ width: '220px', background: '#161b22', borderRadius: '8px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-        <div style={{ fontWeight: '800', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="mockup-ui-wrapper">
+      <div className="mockup-sidebar">
+        <div className="mockup-sidebar-top-row">
           <span>Chat History</span>
-          <span style={{ fontSize: '0.75rem', background: '#00f2fe', color: '#090a0f', padding: '2px 6px', borderRadius: '4px' }}>Active</span>
+          <span className="mockup-sidebar-active-badge">Active</span>
         </div>
-        <div style={{ background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '6px', borderLeft: '3px solid #00f2fe' }}>Uncensored Assistant</div>
-        <div style={{ padding: '0.5rem', color: '#8b949e' }}>Document Ingestion</div>
-        <div style={{ padding: '0.5rem', color: '#8b949e' }}>System Prompts</div>
-        <div style={{ marginTop: 'auto', background: 'rgba(0,242,254,0.05)', border: '1px dashed rgba(0,242,254,0.3)', padding: '0.75rem', borderRadius: '6px', fontSize: '0.75rem' }}>
-          <div style={{ fontWeight: '700', color: '#00f2fe' }}>Ollama Engine: Online</div>
-          <div style={{ color: '#8b949e', marginTop: '4px' }}>Model: Gemma 2 2B</div>
+        <div className="mockup-sidebar-active-item">Uncensored Assistant</div>
+        <div className="mockup-sidebar-item">Document Ingestion</div>
+        <div className="mockup-sidebar-item">System Prompts</div>
+        <div className="mockup-sidebar-bottom-box">
+          <div className="mockup-engine-status">Ollama Engine: Online</div>
+          <div className="mockup-engine-model">Model: Gemma 2 2B</div>
         </div>
       </div>
-      <div style={{ flexGrow: 1, background: '#161b22', borderRadius: '8px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <div style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontWeight: '700', fontSize: '0.95rem' }}>PortLLM Uncensored Chat Interface</span>
-          <div style={{ display: 'flex', gap: '0.75rem', fontSize: '0.75rem', color: '#8b949e' }}>
-            <span>CPU: <strong style={{ color: '#27c93f' }}>18%</strong></span>
-            <span>RAM: <strong style={{ color: '#ffbd2e' }}>4.2 GB</strong></span>
+      <div className="mockup-chat-panel">
+        <div className="mockup-chat-header">
+          <span className="mockup-chat-title">PortLLM Uncensored Chat Interface</span>
+          <div className="mockup-chat-telemetry">
+            <span>CPU: <strong className="mockup-cpu-green">18%</strong></span>
+            <span>RAM: <strong className="mockup-ram-yellow">4.2 GB</strong></span>
           </div>
         </div>
-        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto' }}>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <div style={{ background: '#00f2fe', color: '#090a0f', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>U</div>
-            <div style={{ background: '#0d0e11', padding: '0.75rem 1rem', borderRadius: '0 12px 12px 12px', maxWidth: '85%', lineHeight: '1.4' }}>
+        <div className="mockup-chat-messages">
+          <div className="mockup-chat-msg-row">
+            <div className="mockup-chat-avatar-user">U</div>
+            <div className="mockup-chat-bubble-user">
               Explain the core logic of PortLLM and why it is private.
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <div style={{ background: '#4facfe', color: '#090a0f', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', flexShrink: 0 }}>AI</div>
-            <div style={{ background: '#21262d', padding: '0.75rem 1rem', borderRadius: '0 12px 12px 12px', maxWidth: '85%', lineHeight: '1.4', color: '#c9d1d9' }}>
+          <div className="mockup-chat-msg-row">
+            <div className="mockup-chat-avatar-ai">AI</div>
+            <div className="mockup-chat-bubble-ai">
               PortLLM is completely private because it runs 100% locally. The application wraps portable Python and pre-compiled Ollama/Llama.cpp binaries inside a single folder. When you send a prompt, it is compiled locally on your host CPU/GPU and no data ever leaves the local drive.
             </div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
-          <input type="text" placeholder="Type an uncensored prompt..." disabled style={{ flexGrow: 1, background: '#0d0e11', border: '1px solid #30363d', borderRadius: '6px', padding: '0.75rem', color: '#fff', outline: 'none', fontFamily: 'inherit' }} />
-          <button disabled style={{ background: '#00f2fe', color: '#090a0f', border: 'none', borderRadius: '6px', padding: '0.75rem 1.25rem', fontWeight: '700', cursor: 'default' }}>Send</button>
+        <div className="mockup-chat-input-row">
+          <input type="text" placeholder="Type an uncensored prompt..." disabled className="mockup-chat-input-field" />
+          <button disabled className="mockup-chat-send-btn">Send</button>
         </div>
       </div>
     </div>
