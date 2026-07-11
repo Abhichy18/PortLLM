@@ -2419,3 +2419,437 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 1rem;
   }
 }
+
+/* ==========================================
+   MOCKUP INTERFACE CLASSES
+   ========================================== */
+.mockup-ui-wrapper {
+  background: #0e1117;
+  height: 480px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  color: #fff;
+  font-size: 0.85rem;
+  border-radius: 0 0 12px 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mockup-sidebar {
+  width: 220px;
+  background: #161b22;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.mockup-sidebar-top-row {
+  font-weight: 800;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mockup-sidebar-active-badge {
+  font-size: 0.75rem;
+  background: #00f2fe;
+  color: #090a0f;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.mockup-sidebar-active-item {
+  background: rgba(255,255,255,0.05);
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-left: 3px solid #00f2fe;
+  font-weight: 600;
+}
+
+.mockup-sidebar-item {
+  padding: 0.5rem;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.mockup-sidebar-bottom-box {
+  margin-top: auto;
+  background: rgba(0,242,254,0.05);
+  border: 1px dashed rgba(0,242,254,0.3);
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.mockup-engine-status {
+  font-weight: 700;
+  color: #00f2fe;
+}
+
+.mockup-engine-model {
+  color: #8b949e;
+  margin-top: 4px;
+}
+
+.mockup-chat-panel {
+  flex-grow: 1;
+  background: #161b22;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.mockup-chat-header {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mockup-chat-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mockup-chat-telemetry {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: #8b949e;
+  white-space: nowrap;
+}
+
+.mockup-cpu-green {
+  color: #27c93f;
+}
+
+.mockup-ram-yellow {
+  color: #ffbd2e;
+}
+
+.mockup-chat-messages {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.mockup-chat-msg-row {
+  display: flex;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.mockup-chat-avatar-user {
+  background: #00f2fe;
+  color: #090a0f;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.mockup-chat-bubble-user {
+  background: #0d0e11;
+  padding: 0.75rem 1rem;
+  border-radius: 0 12px 12px 12px;
+  max-width: 85%;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.mockup-chat-avatar-ai {
+  background: #4facfe;
+  color: #090a0f;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.mockup-chat-bubble-ai {
+  background: #21262d;
+  padding: 0.75rem 1rem;
+  border-radius: 0 12px 12px 12px;
+  max-width: 85%;
+  line-height: 1.4;
+  color: #c9d1d9;
+  word-break: break-word;
+}
+
+.mockup-chat-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.mockup-chat-input-field {
+  flex-grow: 1;
+  background: #0d0e11;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: #fff;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.mockup-chat-send-btn {
+  background: #00f2fe;
+  color: #090a0f;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  cursor: default;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN ADDITIONS & PATCHES
+   ========================================== */
+
+/* Tablet & Mobile Screens */
+@media (max-width: 991px) {
+  /* Features Split Column Stacking */
+  .features-split-layout {
+    flex-direction: column !important;
+    gap: 3rem;
+  }
+  
+  .features-split-info {
+    text-align: center;
+    max-width: 100% !important;
+  }
+  
+  .features-bullet-list {
+    align-items: center;
+    max-width: 500px;
+    margin: 1.5rem auto 0 auto;
+  }
+  
+  .features-split-deck-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+/* Mobile Screens (Under 768px) */
+@media (max-width: 768px) {
+  /* Mockup UI Sidebar hidden on Mobile */
+  .mockup-sidebar {
+    display: none !important;
+  }
+  
+  .mockup-ui-wrapper {
+    padding: 0.75rem !important;
+    height: auto !important;
+    min-height: 380px;
+  }
+  
+  .mockup-chat-panel {
+    padding: 0.75rem !important;
+  }
+  
+  .mockup-chat-title {
+    font-size: 0.85rem !important;
+  }
+
+  /* Live Tracker Band Padding and wrapping */
+  .live-tracker-band {
+    padding: 3rem 1rem !important;
+  }
+  
+  .live-tracker-glass {
+    padding: 2rem 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+  
+  .lt-big-number {
+    font-size: 3.5rem !important;
+  }
+  
+  .lt-trust-pills {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+  }
+  
+  .lt-trust-pill {
+    font-size: 0.7rem !important;
+    padding: 0.35rem 0.75rem !important;
+  }
+
+  /* Timeline adjustment */
+  .timeline {
+    padding-left: 1.5rem !important;
+  }
+  
+  .timeline-marker {
+    left: -1.5rem !important;
+  }
+  
+  .gif-box-outer {
+    margin: 1rem 0 !important;
+  }
+
+  /* Footer layout */
+  .footer-taped-content-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+    text-align: center;
+  }
+  
+  .footer-taped-brand-col {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* Very Small Mobile Screens (Under 576px) */
+@media (max-width: 576px) {
+  /* Navbar adjustments - hide "Download ZIP" text, keep icon */
+  .hero-nav-inner {
+    padding: 0.75rem 1rem !important;
+    gap: 0.5rem !important;
+  }
+  
+  .hero-nav-inner .hero-logo {
+    font-size: 1.25rem !important;
+  }
+  
+  .hero-nav-inner .hero-cta-btn.primary span {
+    display: none !important;
+  }
+  
+  .hero-nav-inner .hero-cta-btn.primary {
+    padding: 0.5rem !important;
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1 !important;
+    width: 38px !important;
+    height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .hero-nav-inner .hero-cta-btn.primary svg {
+    margin: 0 !important;
+  }
+
+  /* Hero Headline scale down */
+  .hero-headline {
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+    padding: 0 0.5rem;
+  }
+
+  /* Hero CTA group vertical stacking */
+  .cta-group-above-mockup {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.75rem !important;
+  }
+  
+  .cta-group-above-mockup .hero-cta-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Live Tracker CTA Button stacking */
+  .lt-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.75rem !important;
+  }
+  
+  .lt-actions .lt-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* FAQ Breakable Cards - font sizing and wrapper adjustment */
+  .breakable-card-wrapper {
+    height: 270px !important; /* give extra space for text wrapping */
+  }
+  
+  .card-question-text {
+    font-size: 0.95rem !important;
+  }
+  
+  .card-bottom-row {
+    font-size: 0.65rem !important;
+  }
+
+  /* Footer bottom row stacking */
+  .footer-taped-bottom {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    text-align: center;
+  }
+  
+  .footer-taped-socials {
+    justify-content: center !important;
+  }
+}
+
+/* Micro-screens (Under 360px - e.g. the 277px width shown in your screenshot) */
+@media (max-width: 360px) {
+  .hero-headline {
+    font-size: 1.8rem !important;
+  }
+  
+  .hero-nav-inner .hero-logo {
+    font-size: 1.1rem !important;
+  }
+  
+  .hero-nav-inner {
+    padding: 0.5rem 0.75rem !important;
+  }
+  
+  .hero-nav-inner .hero-cta-btn {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .breakable-card-wrapper {
+    height: 310px !important; /* even more space for very narrow screens */
+  }
+}
