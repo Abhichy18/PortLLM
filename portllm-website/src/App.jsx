@@ -795,6 +795,9 @@ export default function App() {
               <button className={`catalog-tab-btn ${catalogTab === 'mobile' ? 'active' : ''}`} onClick={() => setCatalogTab('mobile')}>Mobile Catalogs</button>
             </div>
             <MorphingCardStack cards={models} />
+            <div className="catalog-custom-model-note">
+              <span><strong>Want a custom model?</strong> You can download <strong>any custom GGUF model</strong> directly from Hugging Face by pasting its direct GGUF download URL during the setup installer phase!</span>
+            </div>
           </div>
 
           <div className="faq-container" id="faq">

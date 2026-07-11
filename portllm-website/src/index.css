@@ -2380,3 +2380,42 @@ h1, h2, h3, h4, h5, h6 {
   overflow: visible;
   z-index: 20;
 }
+
+/* Custom Model Note under Catalog */
+.catalog-custom-model-note {
+  margin: 3.5rem auto 0 auto;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-dark-muted);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  max-width: 680px;
+  width: fit-content;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+  position: relative;
+  z-index: 5;
+}
+
+.catalog-custom-model-note strong {
+  color: var(--text-dark);
+}
+
+@media (max-width: 640px) {
+  .catalog-custom-model-note {
+    border-radius: 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.25rem;
+    padding: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
