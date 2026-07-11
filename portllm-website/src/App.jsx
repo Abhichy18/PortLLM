@@ -3,6 +3,7 @@ import './App.css'
 import { ContainerScroll } from './components/ui/ContainerScroll.jsx'
 import DisplayCards from './components/ui/DisplayCards.jsx'
 import { MorphingCardStack } from './components/ui/MorphingCardStack.jsx'
+import { BreakableFAQCard } from './components/ui/BreakableFAQCard.jsx'
 import portllmInstallationGif from './assets/portllm-installation.gif'
 import step2Image from './assets/image.png'
 import installationDemoVideo from './assets/Installation demo Portllm.mp4'
@@ -66,14 +67,6 @@ function TwitterIcon({ size = 20, className = "" }) {
   return (
     <svg className={className} viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
       <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-    </svg>
-  )
-}
-
-function ChevronIcon() {
-  return (
-    <svg className="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="6 9 12 15 18 9"></polyline>
     </svg>
   )
 }
@@ -352,7 +345,6 @@ export default function App() {
   const [activeOS, setActiveOS] = useState('windows')
   const [catalogTab, setCatalogTab] = useState('desktop')
   const [copied, setCopied] = useState('')
-  const [openFAQ, setOpenFAQ] = useState(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [showSplash, setShowSplash] = useState(true)
   const [touchStartY, setTouchStartY] = useState(0)
@@ -809,17 +801,16 @@ export default function App() {
             <div className="section-header">
               <span className="section-badge">FAQ</span>
               <h2 className="section-title">Frequently Asked Questions</h2>
-              <p className="section-subtitle">Find answers to common technical queries about the PortLLM environment setup.</p>
+              <p className="section-subtitle">Find answers to common technical queries about the PortLLM environment setup. Drag and shake a card to shatter it and reveal the answer!</p>
             </div>
-            <div className="faq-list">
+            <div className="faq-grid">
               {FAQS.map((faq, i) => (
-                <div className={`faq-item ${openFAQ === i ? 'active' : ''}`} key={i}>
-                  <button className="faq-question" onClick={() => setOpenFAQ(openFAQ === i ? null : i)}>
-                    <span>{faq.q}</span>
-                    <ChevronIcon />
-                  </button>
-                  <div className="faq-answer"><p>{faq.a}</p></div>
-                </div>
+                <BreakableFAQCard
+                  key={i}
+                  question={faq.q}
+                  answer={faq.a}
+                  index={i}
+                />
               ))}
             </div>
           </div>
