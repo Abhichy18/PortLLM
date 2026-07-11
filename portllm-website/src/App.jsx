@@ -105,8 +105,8 @@ function CopyBlock({ command, copiedText, onCopy }) {
 /* ====================================================
    LIVE TRACKER — Real-time download & visit counter
    ==================================================== */
-const TRACKER_BASE = 340
-const TRACKER_KEY  = 'portllm_tracker'
+const TRACKER_BASE = 68
+const TRACKER_KEY  = 'portllm_tracker_v2'
 
 function useLiveCounter() {
   const [count, setCount] = useState(() => {
