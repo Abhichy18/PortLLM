@@ -370,8 +370,9 @@ Write-Host "[5/7] Creating AI model configurations..." -ForegroundColor Yellow
 
 foreach ($m in $SelectedModels) {
     $modelfilePath = "$USB_Drive\Shared\models\Modelfile-$($m.Local)"
+    $absoluteGgufPath = "$USB_Drive/Shared/models/$($m.File)" -replace '\\', '/'
     $modelfileContent = @"
-FROM ./$($m.File)
+FROM $absoluteGgufPath
 PARAMETER temperature 0.7
 PARAMETER top_p 0.9
 SYSTEM $($m.Prompt)
@@ -382,8 +383,9 @@ SYSTEM $($m.Prompt)
 
 # Also create a legacy "Modelfile" pointing to the first selected model (backward compat)
 $firstModel = $SelectedModels[0]
+$firstModelGgufPath = "$USB_Drive/Shared/models/$($firstModel.File)" -replace '\\', '/'
 $legacyModelfile = @"
-FROM ./$($firstModel.File)
+FROM $firstModelGgufPath
 PARAMETER temperature 0.7
 PARAMETER top_p 0.9
 SYSTEM $($firstModel.Prompt)
@@ -509,13 +511,14 @@ if (-Not (Test-Path "$USB_Drive\Shared\bin\ollama-windows.exe")) {
             foreach ($m in $modelsToImport) {
                 Write-Host "      Importing $($m.Name)..." -ForegroundColor Yellow
                 Write-Host "      Running: ollama-windows.exe create $($m.Local) -f Modelfile-$($m.Local)" -ForegroundColor DarkGray
-                $createOutput = & $OllamaExe create $m.Local -f "Modelfile-$($m.Local)" 2>&1
-
+                
+                # Run directly to avoid pipeline buffer lockups on large model data streams
+                & $OllamaExe create $m.Local -f "Modelfile-$($m.Local)"
+                
                 if ($LASTEXITCODE -eq 0) {
                     Write-Host "      $($m.Name) imported successfully!" -ForegroundColor Green
                 } else {
                     Write-Host "      ERROR: Failed to import $($m.Name) (exit $LASTEXITCODE)" -ForegroundColor Red
-                    Write-Host "      $createOutput" -ForegroundColor Red
                 }
             }
         }
