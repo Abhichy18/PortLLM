@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Abhichy18/PortLLM/main/portllm-website/public/logo.png" alt="PortLLM Logo" width="120" />
-</p>
+
 
 <h1 align="center">PortLLM</h1>
 
