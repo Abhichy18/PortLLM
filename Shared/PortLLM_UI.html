@@ -185,8 +185,8 @@
         padding: 0;
         box-sizing: border-box;
       }
-      html {
-        background: var(--bg);
+      html, body {
+        background: transparent !important;
       }
       body {
         height: 100%;
@@ -1874,10 +1874,9 @@
     </style>
   </head>
   <body>
-    <!-- PortLLM Background Video -->
-    <video id="bg-video" autoplay loop muted playsinline>
-      <source src="./vendor/bg_video.mp4" type="video/mp4">
-    </video>
+    <!-- PortLLM Background Canvas & Video -->
+    <div id="bg-canvas" style="position: fixed; inset: 0; z-index: -3; background: var(--bg); transition: background var(--spd);"></div>
+    <video id="bg-video" src="./vendor/bg_video.mp4" autoplay loop muted playsinline></video>
     <div id="bg-blur-overlay"></div>
 
     <div id="app">
