@@ -36,7 +36,7 @@
 
 ---
 
-## What is PortLLM
+## What is PortLLM?
 
 PortLLM is an open-source, zero-dependency, portable local AI environment. It runs directly from a USB drive, portable SSD, or local disk folder without installing anything on the host machine.
 
